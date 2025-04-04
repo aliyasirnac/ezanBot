@@ -52,11 +52,26 @@ func (b *Bot) SendMessage(ctx context.Context, message string) {
 }
 
 func handler(ctx context.Context, b *botApi.Bot, update *models.Update) {
-	_, err := b.SendMessage(ctx, &botApi.SendMessageParams{
-		ChatID: update.Message.Chat.ID,
-		Text:   update.Message.Text,
-	})
-	if err != nil {
-		zap.L().Error("Failed to handle message", zap.Error(err))
+	if update.Message == nil {
+		return
+	}
+
+	switch update.Message.Text {
+	case "/ping":
+		_, err := b.SendMessage(ctx, &botApi.SendMessageParams{
+			ChatID: update.Message.Chat.ID,
+			Text:   "pong 🏓",
+		})
+		if err != nil {
+			zap.L().Error("Failed to handle /ping command", zap.Error(err))
+		}
+	default:
+		_, err := b.SendMessage(ctx, &botApi.SendMessageParams{
+			ChatID: update.Message.Chat.ID,
+			Text:   "Komutu anlayamadım. 🤖",
+		})
+		if err != nil {
+			zap.L().Error("Failed to handle unknown command", zap.Error(err))
+		}
 	}
 }
