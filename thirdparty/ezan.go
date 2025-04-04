@@ -38,7 +38,7 @@ func NewEzan(baseURL string) ThirdParty[EzanRequest, EzanResponse] {
 }
 
 func (e ezanAPI) Handler(ctx context.Context, r *EzanRequest) (*EzanResponse, error) {
-	ctx, cancel := context.WithTimeout(ctx, time.Second*3)
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
 	defer cancel()
 
 	url := fmt.Sprintf("%s/vakitler/%d", e.BaseUrl, r.IlceId)
