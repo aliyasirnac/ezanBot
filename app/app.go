@@ -48,6 +48,7 @@ func (a *App) Start(ctx context.Context) error {
 	a.Cron = cron.New()
 
 	_, err := a.Cron.AddFunc("0 0 1 * *", func() {
+		zap.L().Info("Monthly fetch by cron job")
 		a.sendEzanTimes(ctx, ezanService)
 	})
 	if err != nil {
@@ -55,7 +56,8 @@ func (a *App) Start(ctx context.Context) error {
 		return err
 	}
 
-	_, err = a.Cron.AddFunc("0 6 * * *", func() {
+	_, err = a.Cron.AddFunc("0 0 * * *", func() {
+		zap.L().Info("Daily fetch by cron job")
 		a.sendEzanTimes(ctx, ezanService)
 	})
 
