@@ -56,12 +56,12 @@ func (a *App) Start(ctx context.Context) error {
 		return err
 	}
 
-	_, err = a.Cron.AddFunc("0 0 * * *", func() {
+	_, err = a.Cron.AddFunc("0 3 * * *", func() {
 		zap.L().Info("Daily fetch by cron job")
 		a.sendEzanTimes(ctx, ezanService)
 	})
 
-	a.sendEzanTimes(ctx, ezanService)
+	//a.sendEzanTimes(ctx, ezanService)
 
 	if err != nil {
 		zap.L().Error("Failed to start daily cronjob", zap.Error(err))
@@ -74,7 +74,7 @@ func (a *App) Start(ctx context.Context) error {
 
 func (a *App) sendEzanTimes(ctx context.Context, ezanService thirdparty.ThirdParty[thirdparty.EzanRequest, thirdparty.EzanResponse]) {
 	today := time.Now().Format("02.01.2006")
-
+	zap.L().Info("Today", zap.String("today", today))
 	res, err := ezanService.Handler(ctx, &thirdparty.EzanRequest{IlceId: 9541})
 	if err != nil {
 		zap.L().Error("Could not get ezan response", zap.Error(err))
