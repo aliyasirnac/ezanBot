@@ -3,6 +3,7 @@ module github.com/aliyasirnac/ezanBot
 go 1.23.1
 
 require (
+	github.com/go-telegram/bot v1.14.1
 	github.com/joho/godotenv v1.5.1
 	github.com/knadh/koanf/parsers/yaml v0.1.0
 	github.com/knadh/koanf/providers/rawbytes v0.1.0
@@ -13,7 +14,6 @@ require (
 )
 
 require (
-	github.com/go-telegram/bot v1.14.1 // indirect
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/knadh/koanf/maps v0.1.1 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect

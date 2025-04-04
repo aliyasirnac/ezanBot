@@ -69,6 +69,6 @@ func (e ezanAPI) Handler(ctx context.Context, r *EzanRequest) (*EzanResponse, er
 	if err := json.Unmarshal(bodyText, &ezanResponse); err != nil {
 		return nil, fmt.Errorf("JSON parse hatası: %w", err)
 	}
-	zap.L().Info("Ezan Fetch Successful", zap.Any("ezanRes", ezanResponse))
+	zap.L().Info("Ezan Fetch Successful", zap.Any("ezanRes", len(ezanResponse)))
 	return &EzanResponse{EzanBody: ezanResponse}, nil
 }
