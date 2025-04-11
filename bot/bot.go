@@ -2,6 +2,7 @@ package bot
 
 import (
 	"context"
+
 	"github.com/aliyasirnac/ezanBot/config"
 	"github.com/aliyasirnac/ezanBot/thirdparty"
 	botApi "github.com/go-telegram/bot"
